@@ -1,2 +1,2 @@
 # future-campus
-an online collegeg predicton web app made using MERN
+an online college predicton web app made using MERN
