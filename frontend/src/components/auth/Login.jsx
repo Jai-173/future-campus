@@ -1,106 +1,84 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../shared/Navbar";
-import { Label } from "../ui/label";
-import { Button } from "../ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { USER_API_END_POINT } from "@/utils/constant";
-import { toast } from "sonner";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setUser } from "@/redux/authSlice";
-import { Loader2 } from "lucide-react";
-import { Input } from "../ui/input";
 
-const Login = () => {
-  const { user, loading } = useSelector((store) => store.auth);
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
-  });
+import { useState } from 'react';
+import Navbar from "../shared/Navbar";
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../ui/button';
+import AuthForm from '../ui/AuthForm';
+import { useForm } from '@/hooks/UseForm';
+
+
+function Login() {
+  const [isRegisterActive, setIsRegisterActive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const changeEventHandler = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+  const { signupData, loginData, handleInputChange } = useForm(isRegisterActive);
+
+  const toggleForm = () => {
+    setIsRegisterActive(!isRegisterActive);
   };
-  const submitHandler = async (e) => {
+
+  const handleAuth = async (e) => {
     e.preventDefault();
-    try {
-      dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-      if (res.data.success) {
-        dispatch(setUser(res.data.user));
-        navigate("/");
-        toast.success(res.data.message);
+
+    if (isRegisterActive) {
+      const { name, phone, email, password } = signupData;
+      if (!name || !phone || !email || !password) {
+        alert("Please fill all the fields");
+        return;
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
-    } finally {
-      dispatch(setLoading(false));
+    } else {
+      const { email, password } = loginData;
+      if (!email || !password) {
+        alert("Please fill all the fields");
+        return;
+      }
     }
+
+    setLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setLoading(false); 
+    navigate("/login"); 
   };
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, []);
+
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center max-w-7xl mx-auto">
-        <form
-          onSubmit={submitHandler}
-          className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
-        >
-          <h1 className="font-bold text-xl mb-5">Login</h1>
-          <div className="my-2">
-            <Label>Email</Label>
-            <Input
-              type="email"
-              value={input.email}
-              name="email"
-              autoComplete="current-email"
-              onChange={changeEventHandler}
-              placeholder="Enter your Email Here.."
+      <div className="flex justify-center items-center min-h-screen bg-gray-800 h-screen bg-cover bg-center login-bg">
+        <div className="relative w-[768px] max-w-full min-h-[480px] bg-[#fff] rounded-[30px] shadow-lg overflow-hidden">
+          <div className={`absolute top-0 h-full w-1/2 transition-all duration-[0.6s] transform ${isRegisterActive ? 'translate-x-full opacity-100 z-20' : 'opacity-0 z-10 pointer-events-none'}`}>
+            <AuthForm 
+              isLogin={true} 
+              handleAuth={handleAuth} 
+              loading={loading} 
+              handleInputChange={handleInputChange}
+              formData={loginData}
             />
           </div>
-          <div className="my-2">
-            <Label>Password</Label>
-            <Input
-              type="password"
-              value={input.password}
-              name="password"
-              autoComplete="current-password"
-              onChange={changeEventHandler}
-              placeholder="Enter your Password Here.."
+
+          <div className={`absolute top-0 left-0 h-full w-1/2 transition-all duration-[0.6s] transform ${isRegisterActive ? 'translate-x-full opacity-0 z-10 pointer-events-none' : 'opacity-100 z-20'}`}>
+            <AuthForm 
+              isLogin={false} 
+              handleAuth={handleAuth} 
+              loading={loading} 
+              handleInputChange={handleInputChange}
+              formData={signupData}
             />
           </div>
-          <div className="flex items-center justify-between"></div>
-          {loading ? (
-            <Button className="w-full my-4">
-              {" "}
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait{" "}
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full my-4 bg-[#6A38C2]">
-              Login
-            </Button>
-          )}
-          <span className="text-sm">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600">
-              Signup
-            </Link>
-          </span>
-        </form>
+
+          <div className={`absolute top-0 left-1/2 h-full w-1/2 bg-[#D4AF37] text-[#fff] flex justify-center items-center transition-all duration-[0.6s] transform ${isRegisterActive ? 'translate-x-[-100%]' : 'translate-x-0'}`}>
+            <div className="flex flex-col items-center text-center">
+              <h1 className="text-2xl mb-4">{isRegisterActive ? "Welcome!" : "Welcome Back!"}</h1>
+              <p className="text-sm mb-4">{isRegisterActive ? "Don't have an account? Create one!" : "Already have an account?"}</p>
+              <Button variant="outline" onClick={toggleForm}>
+                {isRegisterActive ? "Signup" : "Login"}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
