@@ -39,7 +39,7 @@ const Register = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 bg-white shadow-lg rounded-3xl overflow-hidden max-w-8xl">
           
           <div className="flex flex-col items-center justify-center bg-[#FFFACD] p-8">
-            <img src="/images/1.png" alt="Logo" className="w-64 mb-5" />
+            <img src="/assets/illustrations/admitted.svg" alt="Logo" className="w-64 mb-5" />
             <p className="text-[#cd7f32] text-3xl font-semibold font-mono mb-3">Be Verified</p>
             <p className="text-[#cd7f32] text-center font-mono">
               Join experienced Designers on this platform.

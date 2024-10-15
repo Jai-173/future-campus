@@ -39,16 +39,16 @@ const Register = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 bg-white shadow-lg rounded-3xl overflow-hidden max-w-8xl">
           
           <div className="flex flex-col items-center justify-center bg-[#FFFACD] p-8">
-            <img src="/images/1.png" alt="Logo" className="w-64 mb-5" />
-            <p className="text-[#cd7f32] text-3xl font-semibold font-mono mb-3">Be Verified</p>
+            <img src="/assets/illustrations/graduate.svg" alt="Logo" className="w-64 mb-5" />
+            <p className="text-[#cd7f32] text-3xl font-semibold font-mono mb-3">A few clicks away</p>
             <p className="text-[#cd7f32] text-center font-mono">
-              Join experienced Designers on this platform.
+              from finding your dream college.
             </p>
           </div>
 
           <div className="flex flex-col justify-center p-10">
-            <h2 className="text-[#cd7f32] text-3xl font-bold mb-5">Welcome!</h2>
-            <p className="text-[#cd7f32] mb-8">We are happy to have you.</p>
+            <h2 className="text-[#cd7f32] text-3xl font-bold mb-5">Welcome Back!</h2>
+            <p className="text-[#cd7f32] mb-8">We are happy to have you back.</p>
 
             <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -130,7 +130,7 @@ const Register = () => {
             </div>
 
             <p className="mt-6 text-center text-sm">
-              Already have an account? <a href="/login" className="text-blue-500 hover:underline">Login</a>
+              Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Register</a>
             </p>
           </div>
         </div>
