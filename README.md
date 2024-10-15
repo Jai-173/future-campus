@@ -1,2 +1,2 @@
 ### Future Campus
-###future-campus.vercel.app
+https://future-campus.vercel.app/
