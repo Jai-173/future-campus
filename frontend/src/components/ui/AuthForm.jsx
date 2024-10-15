@@ -11,18 +11,21 @@ const AuthForm = ({ isLogin, handleAuth, loading, handleInputChange, formData })
       <SocialIcon icon={faGoogle} />
       <SocialIcon icon={faMicrosoft} />
     </div>
-    {!isLogin && <Input type="text" placeholder="Name" name="signupName" onChange={handleInputChange} />}
-    {!isLogin && <Input type="tel" placeholder="Phone Number" name="signupPhone" onChange={handleInputChange} />}
+    {!isLogin && <Input type="text" placeholder="Name" name="signupName" required="" onChange={handleInputChange} />}
+    {!isLogin && <Input type="tel" placeholder="Phone Number" name="signupPhone" required="" onChange={handleInputChange} />}
     <Input 
       type="email" 
       placeholder={isLogin ? "Login Email" : "Signup Email"} 
       name={isLogin ? "loginEmail" : "signupEmail"} 
-      onChange={handleInputChange} 
+      required=""
+      onChange={handleInputChange
+      } 
     />
     <Input 
       type="password" 
       placeholder={isLogin ? "Login Password" : "Signup Password"} 
       name={isLogin ? "loginPassword" : "signupPassword"} 
+      required=""
       onChange={handleInputChange} 
     />
     {isLogin && <a href="/" className="text-[#D4AF37] text-sm mt-4">Forgot Your Password?</a>}

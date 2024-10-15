@@ -59,17 +59,9 @@ const Navbar = () => {
           </ul>
           {!user ? (
             <div className="flex items-center gap-2">
-              <Link to="/login"> 
-                <Button variant="default">Login/Signup</Button>
+              <Link to="/register"> 
+                <Button variant="default">LOG-IN / REGISTER</Button>
               </Link>
-              {/* <Link to="/login"> 
-                <Button variant="outline">Login</Button>
-              </Link>
-              <Link to="/signup">
-                <Button variant="default">
-                  Signup
-                </Button>
-              </Link> */}
             </div>
           ) : (
             <Popover>

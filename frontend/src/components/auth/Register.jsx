@@ -51,7 +51,17 @@ const Register = () => {
             <p className="text-[#cd7f32] mb-8">We are happy to have you.</p>
 
             <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+              <div className="mb-4">
+                <Input
+                  type="name"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
                 <Input
                   type="email"
                   name="email"
@@ -80,20 +90,6 @@ const Register = () => {
                   onChange={handleChange}
                   required
                 />
-              </div>
-
-              <div className="flex items-center justify-between mb-6">
-                <label className="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    name="rememberMe"
-                    checked={formData.rememberMe}
-                    onChange={handleChange}
-                    className="text-blue-500 focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-500">Remember Me</span>
-                </label>
-                <a href="#" className="text-sm text-blue-500 hover:underline">Forgot Password?</a>
               </div>
 
               <button
