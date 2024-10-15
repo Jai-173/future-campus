@@ -24,7 +24,7 @@ const Cards = () => {
                 Predict the best-fit colleges based on rank and percentile analysis.
                 </p>
                 {
-                    !user ? <Link to="/login"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
+                    !user ? <Link to="/register"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
                     MORE
                   </button></Link> : <Link to="/collegep"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
                   MORE
@@ -46,7 +46,7 @@ const Cards = () => {
                 <p class="mt-4 text-[#333333]">
                 Predict rank based on student performance and available data.
                 </p>
-                <Link to="/login"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
+                <Link to="/register"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
                   MORE
                 </button></Link>
               </div>
@@ -64,7 +64,7 @@ const Cards = () => {
                 <p class="mt-4 text-[#333333]">
                 Convert marks to percentile for better evaluation.
                 </p>
-                <Link to="/login"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
+                <Link to="/register"><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
                   MORE
                 </button></Link>
               </div>
