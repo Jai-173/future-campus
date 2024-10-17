@@ -1,9 +1,11 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 import Home from "./components/Home";
 import CollegeP from "./components/CollegeP";
+import RankP from "./components/RankP";
+import PercentileP from "./components/PercentileP";
 
 const appRouter = createBrowserRouter([
   {
@@ -11,17 +13,25 @@ const appRouter = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/collegep",
     element: <CollegeP/>,
   },
+  {
+    path:"/rankp",
+    element:<RankP/>
+  },
+  {
+    path:"/percentilep",
+    element:<PercentileP/>
+  }
 ]);
 function App() {
   return (

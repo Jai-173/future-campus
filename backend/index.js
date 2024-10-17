@@ -3,16 +3,15 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import connectDB from "./utils/ConnectDB.js";
 import cors from "cors";
-import userRoute from "./routes/user.routes.js";
+import userRoute from "./routes/user.routes.js"
 
-dotenv.config();
+dotenv.config({});
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-
 const corsOptions = {
     origin: `${process.env.FRONTEND_URL}`,
     credentials: true,
@@ -23,9 +22,9 @@ app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
-app.use("/api/user", userRoute);
+app.use("/api", userRoute);
 
-app.listen(PORT, () => {
+app.listen(PORT,()=>{
     connectDB();
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+    console.log(`Server running at port ${PORT}`);
+})

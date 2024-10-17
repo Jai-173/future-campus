@@ -1,6 +1,7 @@
 import React from 'react'
 import { ReactTyped } from 'react-typed'
 import { Button } from '../ui/button'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -25,9 +26,11 @@ const Hero = () => {
             <br />
             and Choose Your Dream College!
           </p>
-          <Button variant="primary">
-            Get Started
-          </Button>
+          <Link to="/register">
+            <Button variant="primary">
+              Get Started
+            </Button>
+          </Link>   
         </div>
         <div className="w-3xl mt-6">
           <img

@@ -1,36 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../shared/Navbar';
 import { Input } from '../ui/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { toast } from 'sonner';
+import 'react-toastify/dist/ReactToastify.css';
+import { setLoading } from '@/redux/authSlice';
+
+const BackendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    rememberMe: false,
+  const { user, loading } = useSelector((store) => store.auth);
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      console.log(formData);
-      setLoading(false);
-    }, 2000);
+
+    // Basic validation to ensure all fields are filled
+    if (!input.name || !input.email || !input.phoneNumber || !input.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", input.name);
+    formData.append("email", input.email);
+    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("password", input.password);
+
+    try {
+      dispatch(setLoading(true));
+      const res = await axios.post(`${BackendURL}/register`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        navigate("/login");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "An error occurred during signup");
+      } else {
+        toast.error("Network error. Please try again.");
+      }
+    }
+     finally {
+      dispatch(setLoading(false));
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div>
@@ -50,14 +90,15 @@ const Register = () => {
             <h2 className="text-[#cd7f32] text-3xl font-bold mb-5">Welcome!</h2>
             <p className="text-[#cd7f32] mb-8">We are happy to have you.</p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submitHandler}>
               <div className="mb-4">
                 <Input
                   type="name"
                   name="name"
                   placeholder="Name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  value={input.name}
+                  autoComplete="current-name"
+                  onChange={changeEventHandler}
                   required
                 />
               </div>
@@ -66,8 +107,20 @@ const Register = () => {
                   type="email"
                   name="email"
                   placeholder="Email address"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={input.email}
+                  autoComplete="current-email"
+                  onChange={changeEventHandler}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <Input
+                  type="text"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  value={input.phoneNumber}
+                  autoComplete="current-phone"
+                  onChange={changeEventHandler}
                   required
                 />
               </div>
@@ -76,18 +129,9 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <Input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
+                  value={input.password}
+                  autoComplete="current-password"
+                  onChange={changeEventHandler}
                   required
                 />
               </div>

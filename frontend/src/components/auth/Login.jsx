@@ -1,36 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../shared/Navbar';
 import { Input } from '../ui/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setLoading } from '@/redux/authSlice'; // Adjust path if necessary
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    rememberMe: false,
+const BackendURL = import.meta.env.VITE_BACKEND_URL;
+
+const Login = () => {
+  const { user, loading } = useSelector((store) => store.auth);
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    rememberMe: false, 
   });
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      console.log(formData);
-      setLoading(false);
-    }, 2000);
+
+    // Check if input fields are filled
+    if (!input.email || !input.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    try {
+      dispatch(setLoading(true));
+      // Use the environment variable
+      const res = await axios.post(`${BackendURL}/login`, input, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        dispatch(setUser(res.data.user));
+        navigate("/");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error(error.response?.data?.message || "An error occurred during login");
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div>
@@ -50,14 +82,14 @@ const Register = () => {
             <h2 className="text-[#cd7f32] text-3xl font-bold mb-5">Welcome Back!</h2>
             <p className="text-[#cd7f32] mb-8">We are happy to have you back.</p>
 
-            <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            <form onSubmit={submitHandler}>
+              <div className="mb-4">
                 <Input
                   type="email"
                   name="email"
                   placeholder="Email address"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={input.email}
+                  onChange={changeEventHandler}
                   required
                 />
               </div>
@@ -66,29 +98,18 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  value={input.password}
+                  onChange={changeEventHandler}
                   required
                 />
               </div>
-              <div className="mb-4">
-                <Input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
               <div className="flex items-center justify-between mb-6">
                 <label className="inline-flex items-center">
                   <input
                     type="checkbox"
                     name="rememberMe"
-                    checked={formData.rememberMe}
-                    onChange={handleChange}
+                    checked={input.rememberMe}
+                    onChange={changeEventHandler}
                     className="text-blue-500 focus:ring-blue-500"
                   />
                   <span className="ml-2 text-sm text-gray-500">Remember Me</span>
@@ -107,7 +128,7 @@ const Register = () => {
                     Please wait...
                   </span>
                 ) : (
-                  "Register"
+                  "Login"
                 )}
               </button>
             </form>
@@ -139,4 +160,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
