@@ -1,6 +1,8 @@
 import React from "react";
 import SCard from "./SCard";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Cards = () => {
     const user=true;
@@ -15,7 +17,7 @@ const Cards = () => {
             <div class="w-sm">
               <img
                 class="w-64"
-                src="https://images01.nicepage.com/c461c07a441a5d220e8feb1a/a17abde8d83650a582a28432/users-with-speech-bubbles-vector_53876-82250.jpg"
+                src="/assets/illustrations/4.jpg"
                 alt=""
               />
               <div class="mt-4 text-center">
@@ -25,8 +27,8 @@ const Cards = () => {
                 </p>
                 {
                   <Link to={!user ? "/register" : "/collegep"}>
-                    <button className="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
-                      MORE
+                    <button className="mt-8 mb-4 py-2 px-6 rounded-lg border border-[#CD7F32] bg-[#CD7F32] text-[#333333] font-bold hover:bg-[#f7f7f7] hover:text-[#CD7F32] transition duration-200 inline-flex items-center gap-2">
+                      More<FontAwesomeIcon icon={faArrowRight} />
                     </button>
                   </Link>
                 }
@@ -37,8 +39,8 @@ const Cards = () => {
           <div class="mt-16 py-4 px-4 bg-whit w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
             <div class="w-sm">
               <img
-                class="w-64"
-                src="https://images01.nicepage.com/c461c07a441a5d220e8feb1a/3b242447f922540fbe750cab/fdf.jpg"
+                class="w-64 h-64"
+                src="/assets/illustrations/2.png"
                 alt=""
               />
               <div class="mt-4 text-[#8148e2] text-center">
@@ -46,8 +48,8 @@ const Cards = () => {
                 <p class="mt-4 text-[#333333]">
                 Predict rank based on student performance and available data.
                 </p>
-                <Link to={user ? "/rankp" : "/register"}><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
-                  MORE
+                <Link to={user ? "/rankp" : "/register"}><button class="mt-8 mb-4 py-2 px-6 rounded-lg border border-[#CD7F32] bg-[#CD7F32] text-[#333333] font-bold hover:bg-[#f7f7f7] hover:text-[#CD7F32] transition duration-200 inline-flex items-center gap-2">
+                  More<FontAwesomeIcon icon={faArrowRight} />
                 </button></Link>
               </div>
             </div>
@@ -56,7 +58,7 @@ const Cards = () => {
             <div class="w-sm">
               <img
                 class="w-64"
-                src="https://images01.nicepage.com/c461c07a441a5d220e8feb1a/8cc47b39e719570b996d9879/dsds.jpg"
+                src="/assets/illustrations/3.png"
                 alt=""
               />
               <div class="mt-4 text-[#8148e2] text-center">
@@ -64,8 +66,8 @@ const Cards = () => {
                 <p class="mt-4 text-[#333333]">
                 Convert marks to percentile for better evaluation.
                 </p>
-                <Link to={user ? "/percentilep" : "/register"}><button class="mt-8 mb-4 py-2 px-14 rounded-full border border-[#CD7F32 bg-[#CD7F32] text-[#333333] tracking-widest hover:bg-[#333333] hover:text-[#CD7F32] transition duration-200">
-                  MORE
+                <Link to={user ? "/percentilep" : "/register"}><button class="mt-8 mb-4 py-2 px-6 rounded-lg border border-[#CD7F32] bg-[#CD7F32] text-[#333333] font-bold hover:bg-[#f7f7f7] hover:text-[#CD7F32] transition duration-200 inline-flex items-center gap-2">
+                  More<FontAwesomeIcon icon={faArrowRight}/>
                 </button></Link>
               </div>
             </div>
