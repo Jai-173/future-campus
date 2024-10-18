@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import CollegeP from "./components/CollegeP";
 import RankP from "./components/RankP";
 import PercentileP from "./components/PercentileP";
+import Colleges from "./components/Colleges";
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/collegep",
     element: <CollegeP/>,
+  },
+  {
+    path: "/colleges",
+    element: <Colleges/>,
   },
   {
     path:"/rankp",

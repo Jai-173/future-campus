@@ -31,7 +31,7 @@ const RankP = () => {
     <>
     <Navbar/>
     <div className="flex justify-center p-16 h-svh bg-[#FFFACD]">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-1/2 h-60 mt-8">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-1/2 h-64 mt-8">
         <h1 className="text-2xl font-bold text-center mb-4">Rank Predictor (PCM)</h1>
         
         <label htmlFor="percentile" className="block text-md font-medium text-gray-700 mb-2">

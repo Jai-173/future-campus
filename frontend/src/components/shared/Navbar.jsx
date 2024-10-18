@@ -56,7 +56,7 @@ const Navbar = () => {
               <Link to="/">
                 <li className="text-[#D4AF37] hover:text-[#f7e7ce]">Home</li>
               </Link>
-              <Link to="/">
+              <Link to="/colleges">
                 <li className="text-[#D4AF37] hover:text-[#f7e7ce]">Colleges</li>
               </Link>
             </>
