@@ -8,6 +8,7 @@ import { setUser, setLoading } from '@/redux/authSlice'; // Adjust path if neces
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Make sure axios is imported
 
 const BackendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -18,7 +19,7 @@ const Login = () => {
     password: "",
     rememberMe: false, 
   });
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ const Login = () => {
 
     try {
       dispatch(setLoading(true));
-      // Use the environment variable
+      // Send login request to backend
       const res = await axios.post(`${BackendURL}/login`, input, {
         headers: {
           "Content-Type": "application/json",
@@ -46,9 +47,9 @@ const Login = () => {
       });
 
       if (res.data.success) {
-        dispatch(setUser(res.data.user));
-        navigate("/");
-        toast.success(res.data.message);
+        dispatch(setUser(res.data.user)); // Save user in Redux store
+        toast.success(res.data.message); // Show success message
+        navigate("/"); // Redirect to home page or dashboard
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -60,7 +61,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/"); // Redirect if already logged in
     }
   }, [user, navigate]);
 

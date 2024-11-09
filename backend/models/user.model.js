@@ -2,21 +2,21 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     fullname: {
-        type: String,
+        type: mongoose.Schema.Types.String,
         required: true
     },
     email: {
-        type: String,
+        type: mongoose.Schema.Types.String,
         required: true,
         unique: true
     },
     phoneNumber: {
-        type: Number,
+        type: mongoose.Schema.Types.Number,
         required: true
     },
     password:{
-        type:String,
-        required:true,
+        type: mongoose.Schema.Types.String,
+        required: true
     },
 },{timestamps:true});
 export const User = mongoose.model('User', userSchema);

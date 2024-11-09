@@ -29,26 +29,27 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+  
     // Basic validation to ensure all fields are filled
     if (!input.name || !input.email || !input.phoneNumber || !input.password) {
       toast.error("Please fill in all fields");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("name", input.name);
-    formData.append("email", input.email);
-    formData.append("phoneNumber", input.phoneNumber);
-    formData.append("password", input.password);
-
+  
+    const data = {
+      fullname: input.name,
+      email: input.email,
+      phoneNumber: input.phoneNumber,
+      password: input.password,
+    };    
+  
     try {
       dispatch(setLoading(true));
-      const res = await axios.post(`${BackendURL}/register`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const res = await axios.post(`${BackendURL}/register`, data, {
+        headers: { "Content-Type": "application/json" }, // Ensure data is sent as JSON
         withCredentials: true,
       });
-
+  
       if (res.data.success) {
         navigate("/login");
         toast.success(res.data.message);
@@ -60,17 +61,16 @@ const Register = () => {
       } else {
         toast.error("Network error. Please try again.");
       }
-    }
-     finally {
+    } finally {
       dispatch(setLoading(false));
     }
-  };
+  };  
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/");  // Only navigate if user is properly set
     }
-  }, [user, navigate]);
+  }, [user, navigate]);  
 
   return (
     <div>
