@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Data for filters
 const categories = [
@@ -20,128 +20,34 @@ const courseDuration = ['All', '4 Years', '5 Years'];
 
 const seatTypes = ['All', 'Gender-Neutral', 'Female-Only'];
 
-// Hardcoded college data
-const colleges = [
-  {
-    institute: '6006 - COEP Technological University',
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 5000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: '6271 - Pune Institute of Computer Technology, Dhankavdi, Pune',
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 7000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: "3215 - Bhartiya Vidya Bhavan's Sardar Patel Institute  of Technology , Andheri,Mumbai",
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 6000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: "3199 - Shri Vile Parle Kelvani Mandal's Dwarkadas J. Sanghvi College ofEngineering, Vile Parle,Mumbai",
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 10000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: '3036 - Institute of Chemical Technology, Matunga, Mumbai',
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 5000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: '6175 - Pimpri Chinchwad Education Trust, Pimpri Chinchwad College of Engineering, Pune',
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 11000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: "6272 - Dr. D. Y. Patil Pratishthan's D.Y.Patil College of Engineering Akurdi, Pune",
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 9000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  {
-    institute: '6007 - Walchand College of Engineering, Sangli',
-    program: 'Computer Engineering',
-    quota: 'AI',
-    category: 'OPEN',
-    seat: 'Gender-Neutral',
-    openingRank: 1,
-    closingRank: 15000,
-    type: "",
-    courseDuration: '4 Years',
-  },
-  // Add more colleges as needed
-];
-
-// Columns configuration
 const columns = [
   {
-    title: 'Institute Name',
+    title: 'Institute name',
     property: 'institute',
     style: { width: '30%' },
   },
   {
     title: 'Program',
     property: 'program',
-    style: { width: '30%' },
+    style: { width: '65%' },
   },
   {
     title: 'Quota',
     property: 'quota',
     data: quotas,
-    style: { width: '10%' },
+    style: { width: '5%' },
   },
   {
-    title: 'Category',
+    title: 'Categories',
     property: 'category',
     data: categories,
-    style: { width: '10%' },
+    style: { width: '5%' },
   },
   {
     title: 'Seat Type',
     property: 'seat',
     data: seatTypes,
-    style: { width: '10%' },
+    style: { width: '5%' },
   },
   {
     title: 'Opening Rank',
@@ -166,17 +72,17 @@ const columns = [
   },
 ];
 
-// TableFilter Component for dropdown filters
+// TableFilter Component
 const TableFilter = ({ title, property, value, data, updateFilters }) => (
-  <th className="p-2 border border-[#333333]">
+  <th className="p-2">
     <span className="font-semibold">{title}</span>
-    {data && data.length > 0 && (
+    {data?.length && (
       <select
         id={property}
         name={title}
         value={value}
         onChange={(e) => updateFilters(property, e.target.value)}
-        className="mt-1 ml-1 p-1 bg-[#D4AF37] text-[#333333] border-2 border-[#333333] rounded focus:outline-none"
+        className="mt-1 p-1 bg-gray-800 text-yellow-400 border-2 border-yellow-400 rounded focus:outline-none"
       >
         {data.map((d) => (
           <option key={d} value={d}>
@@ -187,11 +93,9 @@ const TableFilter = ({ title, property, value, data, updateFilters }) => (
     )}
   </th>
 );
-
-// CollegeTable Component that renders the filtered colleges
-const CollegeTable = ({ filters, updateFilters, filteredColleges }) => (
+const CollegeTable = ({ filters, updateFilters }) => (
   <table className="min-w-full table-auto border-collapse bg-gray-100 shadow-lg mt-5">
-    <thead className="bg-[#D4AF37] text-[#333333]">
+    <thead className="bg-gray-800 text-white">
       <tr>
         {columns.map((column) => (
           <TableFilter
@@ -206,63 +110,29 @@ const CollegeTable = ({ filters, updateFilters, filteredColleges }) => (
       </tr>
     </thead>
     <tbody>
-      {filteredColleges.length > 0 ? (
-        filteredColleges.map((college, index) => (
-          <tr key={index} className="border-t">
-            {columns.map((column) => (
-              <td key={column.property} className="p-2 border border-gray-300">
-                {college[column.property]}
-              </td>
-            ))}
-          </tr>
-        ))
-      ) : null}
+      {/* Rows would go here, dynamically rendered based on filter results */}
     </tbody>
   </table>
 );
 
-// CollegePredictorWithFilters Component that handles filtering logic
-const CollegePredictorWithFilters = ({ rank }) => {
-  const [filters, setFilters] = useState({
+const CollegePredictorWithFilters = () => {
+  const [filters, setFilters] = React.useState({
     category: 'OPEN',
     quota: 'All',
     seat: 'All',
     courseDuration: 'All',
   });
 
-  // Function to update filters
   const updateFilters = (property, value) => {
-    setFilters((prevFilters) => ({ ...prevFilters, [property]: value }));
+    setFilters({ ...filters, [property]: value });
   };
-
-  // Filter the colleges based on the selected filters
-  const filteredColleges = colleges.filter((college) => {
-    const categoryCheck = filters.category === 'All' || college.category === filters.category;
-    const quotaCheck = filters.quota === 'All' || college.quota === filters.quota;
-    const seatCheck = filters.seat === 'All' || college.seat === filters.seat;
-    const durationCheck =
-      filters.courseDuration === 'All' || college.courseDuration === filters.courseDuration;
-
-    // Check if the rank falls within the closing rank of the college
-    const rankCheck = rank <= college.closingRank;
-
-    return categoryCheck && quotaCheck && seatCheck && durationCheck && rankCheck;
-  });
 
   return (
     <div className="">
-      {filteredColleges.length > 0 ? (
-        <CollegeTable
-          filters={filters}
-          updateFilters={updateFilters}
-          filteredColleges={filteredColleges}
-        />
-      ) : (
-        <div className="text-center py-3">
-        </div>
-      )}
+      <CollegeTable filters={filters} updateFilters={updateFilters} />
     </div>
   );
 };
 
 export default CollegePredictorWithFilters;
+    

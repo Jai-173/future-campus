@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "./shared/Navbar";
-import { Button } from "./ui/button";
-import Footer from "./shared/Footer";
 
 const PercentileP = () => {
   const [marks, setMarks] = useState('');
@@ -64,8 +62,8 @@ const PercentileP = () => {
   return (
     <>
     <Navbar/>
-    <div className="flex justify-center h-screen bg-[#FFFACD]">
-      <div className="bg-white p-4 rounded-xl shadow-md w-1/2 h-[400px] mt-8">
+    <div className="flex justify-center h-screen bg-gray-100">
+      <div className="bg-white p-4 rounded-xl shadow-md w-1/2 h-96 mt-8">
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           MHT-CET Percentile Predictor
         </h1>
@@ -75,7 +73,7 @@ const PercentileP = () => {
         </label>
         <input
           type="number"
-          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={marks}
           onChange={(e) => setMarks(e.target.value)}
           placeholder="Enter marks between 0 and 200"
@@ -87,21 +85,21 @@ const PercentileP = () => {
           Select Difficulty Level:
         </label>
         <select
-          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
         >
-          <option value="easy">Easy</option>
           <option value="medium">Medium</option>
+          <option value="easy">Easy</option>
           <option value="hard">Hard</option>
         </select>
 
-        <Button
+        <button
           onClick={predictPercentile}
-          className="w-full mt-8"
+          className="w-full mt-6 p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
         >
           Predict Percentile
-        </Button>
+        </button>
 
         {predictedPercentile && (
           <p className="mt-4 text-2xl font-bold text-center text-gray-700">
@@ -110,8 +108,7 @@ const PercentileP = () => {
         )}
       </div>
     </div>
-    <Footer />
-   </>
+    </>
   );
 };
 
