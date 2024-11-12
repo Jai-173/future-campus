@@ -62,7 +62,7 @@ const PercentileP = () => {
   return (
     <>
     <Navbar/>
-    <div className="flex justify-center h-screen bg-gray-100">
+    <div className="flex justify-center h-screen bg-[#FFFACD]">
       <div className="bg-white p-4 rounded-xl shadow-md w-1/2 h-96 mt-8">
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           MHT-CET Percentile Predictor
@@ -96,7 +96,7 @@ const PercentileP = () => {
 
         <button
           onClick={predictPercentile}
-          className="w-full mt-6 p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+          className="w-full mt-6 p-3 bg-[#D4AF37] text-bold text-[#333333] rounded-lg hover:bg-[#b19025] transition duration-300"
         >
           Predict Percentile
         </button>
