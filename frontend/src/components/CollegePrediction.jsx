@@ -165,7 +165,7 @@ const CollegePrediction = () => {
                     </select>
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor="state">State:</label>
                     <input 
                         type="text" 
@@ -175,7 +175,7 @@ const CollegePrediction = () => {
                         placeholder="Enter your state"
                         className="form-control"
                     />
-                </div>
+                </div> */}
 
                 <div className="form-group">
                     <label htmlFor="sortby">Sort By:</label>
@@ -186,7 +186,6 @@ const CollegePrediction = () => {
                         className="form-control"
                     >
                         <option value="Rank">Rank</option>
-                        <option value="Percentile">Percentile</option>
                     </select>
                 </div>
 
