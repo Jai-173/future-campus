@@ -72,7 +72,7 @@ const Navbar = () => {
               <PopoverTrigger as>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+                    src="./assets/user.png"
                     alt=""
                   />
                 </Avatar>
@@ -82,7 +82,7 @@ const Navbar = () => {
                   <div className="flex gap-2 space-y-2">
                     <Avatar className="cursor-pointer">
                       <AvatarImage
-                        src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+                        src="./assets/user.png"
                         alt=""
                       />
                     </Avatar>
