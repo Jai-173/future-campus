@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <Link to="/">
               <h1 className="text-2xl font-bold">
-                <span className="text-[#f7e7ce]">Future</span><span className="text-[#D4AF37]">Campus</span>
+                <span className="text-[#CD7F32]">Future</span><span className="text-[#D4AF37]">Campus</span>
               </h1>
             </Link>
           </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "./shared/Navbar";
+import Footer from "./shared/Footer";
 
 const PercentileP = () => {
   const [marks, setMarks] = useState('');
-  const [difficulty, setDifficulty] = useState('medium');
+  const [difficulty, setDifficulty] = useState('easy');
   const [predictedPercentile, setPredictedPercentile] = useState(null);
 
   const marksPercentile = [
@@ -62,7 +63,7 @@ const PercentileP = () => {
   return (
     <>
     <Navbar/>
-    <div className="flex justify-center h-screen bg-[#FFFACD]">
+    <div className="flex justify-center h-screen bg-[#FFFACD] pt-10">
       <div className="bg-white p-4 rounded-xl shadow-md w-1/2 h-96 mt-8">
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           MHT-CET Percentile Predictor
@@ -73,7 +74,7 @@ const PercentileP = () => {
         </label>
         <input
           type="number"
-          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
           value={marks}
           onChange={(e) => setMarks(e.target.value)}
           placeholder="Enter marks between 0 and 200"
@@ -85,12 +86,12 @@ const PercentileP = () => {
           Select Difficulty Level:
         </label>
         <select
-          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-2 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
         >
-          <option value="medium">Medium</option>
           <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
 
@@ -108,6 +109,7 @@ const PercentileP = () => {
         )}
       </div>
     </div>
+    <Footer />
     </>
   );
 };

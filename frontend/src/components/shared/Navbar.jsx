@@ -33,7 +33,7 @@ const Navbar = () => {
     }
 }
   return (
-    <div className="bg-[#333333]">
+    <div className="fixed bg-transparent top-0 left-0 w-full z-50 backdrop-blur-md bg-opacity-50">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div className="flex">
         <Avatar className="cursor-pointer">
@@ -45,7 +45,7 @@ const Navbar = () => {
           <div className="my-1">
             <Link to="/">
               <h1 className="text-2xl font-bold">
-                <span className="text-[#f7e7ce]">Future</span><span className="text-[#d4af37]">Campus</span>
+                <span className="text-[#CD7F32]">Future</span><span className="text-[#d4af37]">Campus</span>
               </h1>
             </Link>
           </div>
