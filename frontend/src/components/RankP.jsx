@@ -186,7 +186,7 @@ const RankP = () => {
                 </li>
               ))
             ) : (
-              <div className="text-gray-600">No history available.</div>
+              <div className="text-gray-600"></div>
             )}
           </ul>
         </div>

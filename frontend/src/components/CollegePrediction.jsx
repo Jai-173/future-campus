@@ -17,7 +17,7 @@ const CollegePrediction = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const data = {
             percentile,
             rank,
@@ -27,30 +27,50 @@ const CollegePrediction = () => {
             category,
             sortby,
         };
-
+    
         try {
-            const response = await fetch('http://127.0.0.1:5000/predict-college', {
+            // Send request to Flask backend for prediction
+            const flaskResponse = await fetch('http://127.0.0.1:5000/predict-college', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.error || 'Failed to fetch data');
+    
+            const flaskResult = await flaskResponse.json();
+    
+            if (!flaskResponse.ok) {
+                throw new Error(flaskResult.error || 'Failed to fetch prediction');
             }
-
-            setResults(result);
+    
+            setResults(flaskResult);
             setError(null);
+    
+            // Send request to Node.js backend to store data in MongoDB
+            const nodeResponse = await fetch('http://127.0.0.1:3001/api/predict-college', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...data, prediction: flaskResult }),
+            });
+    
+            const nodeResult = await nodeResponse.json();
+    
+            if (!nodeResponse.ok) {
+                throw new Error(nodeResult.error || 'Failed to store data');
+            }
+    
+            console.log('Data successfully stored in MongoDB:', nodeResult);
         } catch (error) {
             setError(error.message);
             setResults([]);
         }
     };
-
+    
+    
+    
     // Function to generate the PDF
     const generatePDF = () => {
         const doc = new jsPDF();

@@ -13,4 +13,5 @@ router.route("/logout").get(logout);
 // New Route for College Prediction
 router.route("/predict-college").post(predictCollege);
 
+
 export default router;
